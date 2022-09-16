@@ -20,7 +20,7 @@ public class PedidoController {
 	@Autowired
 	private PedidoRepository pedidoRepository;
 
-	@GetMapping("formulario") 
+	@GetMapping("formulario")
 	public String formulario(RequisicaoNovoPedido requisicao) {
 		return "pedido/formulario";
 	}
@@ -33,8 +33,6 @@ public class PedidoController {
 		
 		Pedido pedido = requisicao.toPedido();
 		pedidoRepository.save(pedido);
-		
 		return "redirect:/home";
 	}
-	
 }

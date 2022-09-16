@@ -21,14 +21,18 @@ public class WebSecurityConfigAdapter extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-                .authorizeRequests().anyRequest().authenticated()
+                .authorizeRequests()
+                .anyRequest().authenticated()
                 .and()
-                .httpBasic();
+                .formLogin(form -> form
+                        .loginPage("/login")
+                        .permitAll())
+                .logout(logout -> logout.logoutUrl("/logout"));
     }
 
     /**
      * Autenticação
-     *  Configurando usuário e senha inicial para teste
+     * Configurando usuário e senha inicial para teste
      */
     @Bean
     @Override
