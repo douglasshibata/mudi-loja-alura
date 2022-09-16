@@ -9,5 +9,5 @@ Curso de Spring MVC: autenticação com Spring Security, API Rest e AJAX
 
 ## Baixar as dependências e executar o projeto 
 ```bash
-    mvn clean install spring-boot:run
+mvn clean install spring-boot:run
 ```
