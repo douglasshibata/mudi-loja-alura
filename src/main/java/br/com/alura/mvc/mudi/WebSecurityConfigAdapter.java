@@ -29,14 +29,20 @@ public class WebSecurityConfigAdapter extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-                .authorizeRequests().antMatchers("/home/**").permitAll()
-                .anyRequest().authenticated()
+                .authorizeRequests()
+                .antMatchers("/home/**")
+                .permitAll()
+                .anyRequest()
+                .authenticated()
                 .and()
                 .formLogin(form -> form
                         .loginPage("/login")
-                        .defaultSuccessUrl("/home", true)
+                        .defaultSuccessUrl("/usuario/pedido", true)
                         .permitAll())
-                .logout(logout -> logout.logoutUrl("/logout"));
+                .logout(logout -> {
+                    logout.logoutUrl("/logout")
+                            .logoutSuccessUrl("/home");
+                });
     }
 
     /**
@@ -50,10 +56,12 @@ public class WebSecurityConfigAdapter extends WebSecurityConfigurerAdapter {
                 .jdbcAuthentication()
                 .dataSource(dataSource)
                 .passwordEncoder(encoder);
-        UserDetails user = User.builder()
-                .username("teste")
-                .password(encoder.encode("teste"))
-                .roles("ADM")
-                .build();
+
+        // UserDetails user =
+        // User.builder()
+        // .username("teste")
+        // .password(encoder.encode("teste"))
+        // .roles("ADM")
+        // .build();
     }
 }
